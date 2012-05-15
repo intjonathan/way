@@ -37,7 +37,7 @@ module ActionView
           partial_template = _pick_partial_template(partial_path)
           partial_content = partial_template.render_partial(self, options[:object], local_assigns)
 
-          if self.controller && self.controller.params.has_key?('_way')
+          if self.controller && self.controller.responds_to?(:params) && self.controller.params.has_key?('_way')
             partial_content << "app/views/#{partial_template.to_s}"
           end
 
